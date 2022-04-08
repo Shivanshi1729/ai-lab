@@ -81,12 +81,10 @@ class AStar:
         for i in range(cols):
             for j in range(rows):
                 grid[i][j] = Node(i, j)
-            if obstacle_ratio == False:
-                pass
-            else:
-                n = randint(0, 100)
-                if n < obstacle_ratio:
-                    grid[i][j].obstacle = True
+                if not obstacle_ratio:
+                    n = randint(0, 100)
+                    if n < obstacle_ratio:
+                        grid[i][j].obstacle = True
         if obstacle_list == False:
             pass
         else:
