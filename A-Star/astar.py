@@ -35,15 +35,14 @@ class Node:
             self.neighbors.append(grid[neighbor_x][neighbor_y + 1])
         if neighbor_y > 0:
             self.neighbors.append(grid[neighbor_x][neighbor_y-1])
-        # diagonals
-        """ if neighbor_x > 0 and neighbor_y > 0:
-                self.neighbors.append(grid[neighbor_x-1][neighbor_y-1])
-        if neighbor_x < columns -1 and neighbor_y > 0:
-                self.neighbors.append(grid[neighbor_x+1][neighbor_y-1])
-        if neighbor_x > 0 and neighbor_y <rows -1:
-                self.neighbors.append(grid[neighbor_x-1][neighbor_y+1])
-        if neighbor_x < columns -1 and neighbor_y < rows -1:
-                self.neighbors.append(grid[neighbor_x+1][neighbor_y+1]) """
+        if neighbor_x > 0 and neighbor_y > 0:
+            self.neighbors.append(grid[neighbor_x-1][neighbor_y-1])
+        if neighbor_x < columns - 1 and neighbor_y > 0:
+            self.neighbors.append(grid[neighbor_x+1][neighbor_y-1])
+        if neighbor_x > 0 and neighbor_y < rows - 1:
+            self.neighbors.append(grid[neighbor_x-1][neighbor_y+1])
+        if neighbor_x < columns - 1 and neighbor_y < rows - 1:
+            self.neighbors.append(grid[neighbor_x+1][neighbor_y+1])
 
 
 class AStar:
@@ -60,7 +59,7 @@ class AStar:
         for i in range(len(open_set)):
             if open_set[i] == current_node:
                 open_set.pop(i)
-            break
+                break
         return open_set
 
     @staticmethod
@@ -124,20 +123,16 @@ class AStar:
                 continue
             else:
                 temp_g = current_node.g + 1
-                control_flag = 0
+                inOpenSet = False
                 for k in range(len(open_set)):
                     if neighbor.x == open_set[k].x and neighbor.y == open_set[k].y:
                         if temp_g < open_set[k].g:
                             open_set[k].g = temp_g
-                        open_set[k].h = AStar.h_score(open_set[k], end)
-                        open_set[k].f = open_set[k].g + open_set[k].h
-                        open_set[k].previous = current_node
-                    else:
-                        pass
-                    control_flag = 1
-                if control_flag == 1:
-                    pass
-                else:
+                            open_set[k].h = AStar.h_score(open_set[k], end)
+                            open_set[k].f = open_set[k].g + open_set[k].h
+                            open_set[k].previous = current_node
+                            inOpenSet = True
+                if not inOpenSet:
                     neighbor.g = temp_g
                     neighbor.h = AStar.h_score(neighbor, end)
                     neighbor.f = neighbor.g + neighbor.h
