@@ -18,7 +18,9 @@
   - tic-tac-toe
     - uses backtacking
   - chess
-    - 
+    - decision tree
+  - first person shooter
+    - brute force
 
 ## Unit II
 
