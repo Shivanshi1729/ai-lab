@@ -1,0 +1,38 @@
+Beam search is a heuristic search algorithm that explores a graph by expanding
+the most promising node in a limited set. Beam search is an optimization of
+best-first search that reduces its memory requirements. Best-first search is a
+graph search which orders all partial solutions (states) according to some
+heuristic. But in beam search, only a predetermined number of best partial
+solutions are kept as candidates. It is thus a greedy algorithm.
+
+\subsubsection*{Algorithm}
+
+\begin{itemize}
+    \item set Node = rootNode and found = False
+    \item if node is goalNode then found = True
+    \item else find the successors of node with their estimated
+          cost and store it in the open list.
+    \item while found is False and open list is not empty
+          \begin{itemize}
+              \item sort the open list
+              \item select top w candidate from the open list and put it in wopen list.
+                    Clean the open list.
+              \item for each node in wopen list
+                    \begin{itemize}
+                        \item if node is the goal node then found = True
+                        \item else find the successors of the node with their estimated
+                              cost and store it in the open list.
+                    \end{itemize}
+          \end{itemize}
+\end{itemize}
+
+\subsubsection*{Analysis:}
+
+\begin{itemize}
+      \item $b$ - branching factor
+      \item $d$ - depth of the graph
+      \item $w$ - is the beam width
+      \item \textbf{Time Complexity:} $O(b^d)$
+      \item \textbf{Time Complexity:} $O(w)$
+      \item Incomplete search
+\end{itemize}

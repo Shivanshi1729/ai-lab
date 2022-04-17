@@ -1,0 +1,50 @@
+\documentclass{article}
+
+\usepackage[a4paper, total={6.5in, 9.6in}]{geometry}
+\usepackage{courier}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\usepackage{fontspec}
+\setmainfont{Ubuntu}
+\setsansfont{Ubuntu}
+\setmonofont{JetBrainsMono Nerd Font Mono}
+%\setmonofont{Iosevka Nerd Font}
+
+\definecolor{mygreen}{rgb}{0.05,0.15,0.11}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  backgroundcolor=\color{white}, basicstyle=\ttfamily, breakatwhitespace=false,
+  breaklines=true, commentstyle=\color{darkgray}, keepspaces=true,
+  keywordstyle=\bfseries\color{black}, morekeywords={*,...},
+  showspaces=false, showstringspaces=false, showtabs=false, 
+  stringstyle=\color{blue}, tabsize=4,
+}
+
+\newcommand{\makesection}[2]{%
+    \section*{#1}
+    \subsection*{Theory}
+    \input{#2/theory.tex}
+    \newpage
+    \subsection*{Code}
+    \lstinputlisting[language=python]{#2/code.py}
+    \subsection*{Output}
+    \lstinputlisting{#2/out.txt}
+    \newpage
+}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\makesection{Depth First Search}{dfs}
+\makesection{Depth Limited Search}{depth-ls}
+\makesection{Breadth First Search}{bfs}
+\makesection{Best First Seach}{best-fs}
+\makesection{Beam Search}{beam}
+\makesection{A*}{a-star}
+
+\end{document}

@@ -1,0 +1,27 @@
+Breadth-first search (BFS) is an algorithm for searching a graph data
+structure for a node that satisfies a given property. It starts at the
+graph root and explores all nodes at the present depth prior to moving
+on to the nodes at the next depth level. Extra memory, usually a queue,
+is needed to keep track of the child nodes that were encountered but not
+yet explored.
+
+\subsubsection*{Algorithm}
+
+\begin{itemize}
+    \item Create an empty queue q
+    \item Append the source node to q
+    \item Loop while q is not empty
+          \begin{itemize}
+              \item tempNode <- q.deque()
+              \item Enqueue tempNode's children (first left then right children) to q
+          \end{itemize}
+\end{itemize}
+
+\subsubsection*{Analysis:}
+
+\begin{itemize}
+    \item $V$ - number of vertices
+    \item $E$ - number of edges
+    \item \textbf{Time Complexity:} $O(V+E)$
+    \item Complete search
+\end{itemize}

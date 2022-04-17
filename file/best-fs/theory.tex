@@ -1,0 +1,33 @@
+Best first search is a traversal technique that decides which node is to be
+visited next by checking which node is the most promising one and then check it.
+For this it uses an evaluation function to decide the traversal.
+
+This best first search technique of tree traversal comes under the category of
+heuristic search or informed search technique.
+
+The cost of nodes is stored in a priority queue. This makes implementation of
+best-first search is same as that of breadth First search. We will use the
+priority queue just like we use a queue for BFS.
+
+\subsubsection*{Algorithm}
+
+\begin{itemize}
+    \item Create a priorityQueue pqueue.
+    \item insert start in pqueue : pqueue.insert(start)
+    \item delete all elements of pqueue one by one.
+          \begin{itemize}
+              \item if, the element is goal. Exit.
+              \item else, traverse neighbors and mark the node examined.
+          \end{itemize}
+    \item End.
+\end{itemize}
+
+\subsubsection*{Analysis:}
+
+\begin{itemize}
+      \item $b$ - branching factor
+      \item $d$ - depth of the graph
+      \item \textbf{Time Complexity:} $O(b^d)$
+      \item \textbf{Time Complexity:} $O(b^d)$
+      \item Complete search
+\end{itemize}

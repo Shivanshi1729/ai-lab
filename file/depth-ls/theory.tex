@@ -1,0 +1,34 @@
+A depth-limited search algorithm is similar to depth-first search with a
+predetermined limit. Depth-limited search can solve the drawback of the
+infinite path in the Depth-first search. In this algorithm, the node at
+the depth limit will treat as it has no successor nodes further.
+
+Depth-limited search can be terminated with two Conditions of failure:
+
+\begin{itemize}
+      \item Standard failure value: It indicates that problem does not have any solution.
+      \item Cutoff failure value: It defines no solution for the problem within a
+            given depth limit.
+\end{itemize}
+
+\subsubsection*{Algorithm}
+
+\begin{itemize}
+      \item Determine the start node and the search depth.
+      \item Check if the current node is the goal node. \\
+            If not: Do nothing \\
+            If yes:return
+      \item Check if the current node is within the specified search depth \\
+            If not: Do nothing \\
+            If yes:Expand the node and save all of its successors in a stack.
+      \item  Call DLS recursively for all nodes of the stack and go back to step 2.
+\end{itemize}
+
+\begin{itemize}
+      \item $b$ - branching factor
+      \item $d$ - depth of the graph
+      \item $l$ - is the restricted depth
+      \item \textbf{Time Complexity:} $O(b*l)$
+      \item \textbf{Time Complexity:} $O(b*l)$
+      \item Incomplete search
+\end{itemize}

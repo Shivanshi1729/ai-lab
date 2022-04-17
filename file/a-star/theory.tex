@@ -1,0 +1,41 @@
+A* Search algorithm is one of the best and popular technique used in path-finding and graph traversals.
+Many games and web-based maps use this algorithm to find the shortest path very efficiently (approximation).
+
+\subsubsection*{Algorithm}
+
+\begin{itemize}
+      \item Initialize the open list
+      \item Initialize the closed list put the starting node on the open list (you can leave its f at zero)
+      \item while the open list is not empty
+            \begin{itemize}
+                  \item find the node with the least $f$ on the open list, call it q
+                  \item pop q off the open list
+                  \item generate q's successors and set their parents to q
+                  \item for each successor
+                        \begin{itemize}
+                              \item if successor is the goal, stop search
+                              \item else, compute both $g$ and $h$ for successor \\
+                                    \textbf{successor.g} = q.g + distance between successor and q \\
+                                    \textbf{successor.h} = distance from goal to successor \\
+                                    (This can be done using many ways, we will discuss
+                                    three heuristics- Manhattan, Diagonal and Euclidean Heuristics) \\
+                                    \textbf{successor.f} = successor.g + successor.h
+                              \item if a node with the same position as successor is in the OPEN list
+                                    which has a lower f than successor, skip this successor
+                              \item if a node with the same position as successor is in the CLOSED
+                                    list which has a lower f than successor, skip this successor
+                                    otherwise, add the node to the open list end (for loop)
+                        \end{itemize}
+                  \item push q on the closed list end (while loop)
+            \end{itemize}
+\end{itemize}
+
+\subsubsection*{Analysis:}
+
+\begin{itemize}
+      \item $b$ - branching factor
+      \item $d$ - depth of the graph
+      \item \textbf{Time Complexity:} $O(b^d)$
+      \item \textbf{Time Complexity:} $O(b^d)$
+      \item Complete search, informed search
+\end{itemize}
