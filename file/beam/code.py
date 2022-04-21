@@ -1,58 +1,60 @@
 from queue import PriorityQueue
-import copy
-
-# Filling adjacency matrix with empty arrays
-beamWidth = 2
-vertices = 14
-graph = [[] for i in range(vertices)]
 
 
-def add_edge(x, y, cost):
-    graph[x].append((y, cost))
-    graph[y].append((x, cost))
-
-def printt(t):
-    while not t.empty():
-        tt = t.get()
-        print(tt[0], tt[1])
-
-def best_first_search(source, target, vertices):
-    visited = [0] * vertices
+def Beam_Search(grid, heuristic, start, end, beamWidth):
+    visited = set([start])
     pq = PriorityQueue()
-    pq.put((0, source))
-    visited[source] = True
-    print("Path: ")
-    while not pq.empty():
-        u = pq.get()[1]
-        # Displaying the path having the lowest cost
-        print(u, end="\n")
-        if u == target:
+    pq.put([heuristic[start], start])
+
+    while(not pq.empty()):
+        current = pq.get()
+
+        print(current[1], end=" ")
+
+        if current[1] == end:
             break
 
-        wpq = pq
+        npq = pq
         pq = PriorityQueue()
 
-        for v, c in graph[u]:
-            if not visited[v]:
-                visited[v] = True
-                wpq.put((c, v))
+        for neighbor in grid[current[1]]:
+            if neighbor not in visited:
+                pq.put([heuristic[neighbor], neighbor])
+                visited.add(neighbor)
 
-        # choose only beamWidth number of candidates
-        i = 0
-        while not wpq.empty() and i < beamWidth:
-            pq.put(wpq.get())
-            i += 1
-    print()
+        for i in range(beamWidth):
+            if not npq.empty():
+                pq.put(npq.get())
 
 
-if __name__ == '__main__':
-    add_edge(0, 1, 1)
-    add_edge(0, 2, 8)
-    add_edge(1, 2, 12)
-    add_edge(1, 4, 13)
-    add_edge(2, 3, 6)
-    add_edge(4, 3, 3)
+graph = {
+    'S': {'A': 3, 'B': 2},
+    'A': {'C': 4, 'D': 1, 'S': 3},
+    'B': {'E': 3, 'F': 1, 'S': 2},
+    'C': {'A': 4},
+    'D': {'A': 1},
+    'E': {'B': 3, 'H': 5},
+    'F': {'B': 1, 'I': 2, 'G': 3},
+    'G': {'F': 3},
+    'I': {'F': 2},
+    'H': {'E': 5},
+}
 
-    source = 0
-    target = 2
-    best_first_search(source, target, vertices)
+heuristic = {
+    'S': 13,
+    'A': 12,
+    'B': 4,
+    'C': 7,
+    'D': 3,
+    'E': 8,
+    'F': 2,
+    'G': 0,
+    'H': 4,
+    'I': 9
+}
+
+source = 'S'
+destination = 'G'
+beamWidth = 2
+
+Beam_Search(graph, heuristic, source, destination, beamWidth)
