@@ -1,5 +1,1 @@
-Current level:  0
-Current level:  1
-Current level:  2
-Path to goal node available
-Path ['A', 'B', 'D']
+S A C D B E F 

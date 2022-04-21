@@ -1,33 +1,32 @@
-from collections import defaultdict
+from queue import Queue
 
 
-class Graph:
-
-    def __init__(self):
-        self.graph = defaultdict(list)
-
-    def addEdge(self, u, v):
-        self.graph[u].append(v)
-
-    def BFS(self, s):
-        # Mark all the vertices as not visited
-        visited = [False] * (max(self.graph) + 1)
-        queue = []
-        # Mark the source node as
-        # visited and enqueue it
-        queue.append(s)
-        visited[s] = True
-        while queue:
-            s = queue.pop(0)
-            print(s, end=" ")
-            for i in self.graph[s]:
-                if visited[i] == False:
-                    queue.append(i)
-                    visited[i] = True
+def BFS(graph, source, destination, visited):
+    q = Queue()
+    q.put(source)
+    visited.add(source)
+    while not q.empty():
+        current = q.get()
+        print(current, end=" ")
+        if(current == destination):
+            return
+        for neighbor in graph[current]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                q.put(neighbor)
 
 
-g = Graph()
-edges = [(0, 1), (0, 2), (1, 2), (2, 0), (2, 3), (3, 3)]
-for x, y in edges:
-    g.addEdge(x, y)
-g.BFS(2)
+graph = {
+    'S': {'A': 3, 'B': 2},
+    'A': {'C': 4, 'D': 1, 'S': 3},
+    'B': {'E': 3, 'F': 1, 'S': 2},
+    'C': {'A': 4},
+    'D': {'A': 1},
+    'E': {'B': 3, 'H': 5},
+    'F': {'B': 1, 'I': 2, 'G': 3},
+    'G': {'F': 3},
+    'I': {'F': 2},
+    'H': {'E': 5}
+}
+
+BFS(graph, 'S', 'G', set())

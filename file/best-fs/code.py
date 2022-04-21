@@ -5,15 +5,11 @@ def Best_First_Search(grid, heuristic, start, end):
     visited = set([start])
     pq = PriorityQueue()
     pq.put([heuristic[start], start])
-
     while(not pq.empty()):
         current = pq.get()
-
         print(current[1], end=" ")
-
         if current[1] == end:
             break
-
         for neighbor in grid[current[1]]:
             if neighbor not in visited:
                 pq.put([heuristic[neighbor], neighbor])
